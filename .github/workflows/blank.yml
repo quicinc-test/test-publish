@@ -19,10 +19,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}         
       - name: Push to artifactory
         uses: docker/build-push-action@v2
-        env:
-          TAG_NAME: ${{github.event.client_payload.tag_name}}
         with:
-          tags: "binaryartifacts-test-github.jfrog.io/test-repo:latest,binaryartifacts-test-github.jfrog.io/test-repo:$TAG_NAME"
+          tags: |
+            binaryartifacts-test-github.jfrog.io/test-repo:latest
+            binaryartifacts-test-github.jfrog.io/test-repo:${{ github.event.client_payload.tag_name }}
           file: Dockerfile.build
           push: true
           
