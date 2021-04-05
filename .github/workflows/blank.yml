@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [repo-released]
 jobs:
-  Build and Push:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -11,13 +11,13 @@ jobs:
         with:
           repository: ${{ github.event.client_payload.repo_name }}
           ref: ${{ github.event.client_payload.ref }}
-      - name: Login to DockerHub
+      - name: Login to artifactory docker
         uses: docker/login-action@v1 
         with:
           registry: binaryartifacts-test-github.jfrog.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}         
-      - name: Push to artifactory
+      - name: Push to artifactory docker
         uses: docker/build-push-action@v2
         with:
           tags: |
