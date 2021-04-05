@@ -15,7 +15,7 @@ jobs:
         uses: docker/login-action@v1 
         with:
           registry: binaryartifacts-test-github.jfrog.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ secrets.DOCKER_TOKEN }}
           password: ${{ secrets.DOCKER_PASSWORD }}         
       - name: Push to artifactory docker
         uses: docker/build-push-action@v2
