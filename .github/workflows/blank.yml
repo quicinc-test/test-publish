@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [repo-released]
 jobs:
-  myEvent:
+  Build and Push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
