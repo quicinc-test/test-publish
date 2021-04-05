@@ -1,4 +1,4 @@
-name: Repository Dispatch
+name: Build and Publish
 on:
   repository_dispatch:
     types: [repo-released]
@@ -22,10 +22,11 @@ jobs:
       - name: Push to artifactory docker
         uses: docker/build-push-action@v2
         with:
+          context: .
+          file: Dockerfile.build
+          push: true
           tags: |
             binaryartifacts-test-github.jfrog.io/test-repo:latest
             binaryartifacts-test-github.jfrog.io/test-repo:${{ github.event.client_payload.tag_name }}
-          file: Dockerfile.build
-          push: true
           
           
